@@ -14,13 +14,13 @@ import Data.List
 -- First Assignment
 -- I'M NOT USING GOOGLE
 -- JUST KIDDING
--- JUST KIDDING ^
+-- JUST fucking KIDDING ^
 
 
 
 -- 1.a
 
-null' x = x
+null' (x:z) = not True
 
 --pembatas
 
@@ -29,7 +29,7 @@ take' x = x
 --pembatas
 
 drop' x = x
-  |
+
 
 --pembatas
 
