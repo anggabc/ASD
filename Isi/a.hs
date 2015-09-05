@@ -51,12 +51,12 @@ map' x = x
 filter' x = x
 
 --pembatas
-
-delete' x = x
+--not yet
+delete' n [x] = [x]
 
 --pembatas
-
-deleteAll' x = x
+--not yet
+deleteAll' x = []
 
 --pembatas
 
@@ -67,8 +67,11 @@ foldl' x = x
 foldl1' x = x
 
 --pembatas
+--not yet
+zip' [a] [b] = [(a,b)]
+if zip' [a] [] then zip' [a] [b] = []
+  else zip' [a] [b] = [(a,b)]
 
-zip' x = x
 
 --pembatas
 
