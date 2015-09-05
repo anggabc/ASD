@@ -1,6 +1,9 @@
 module One where
 import Data.List
-  --
+
+  -- (:cd e:/code/ASD/Isi)
+  -- (:set prompt "blabla")
+
 koko = 2343243
 square x = x*x
 cube x = (square x)*x
@@ -13,3 +16,4 @@ x = 50
 --drop' 2 [2,3,4,5,6]
 --drop' 1 [3,4,5,6]
 --drop' 0 [4,5,6] = [4,5,6]
+--commit suicide
