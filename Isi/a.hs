@@ -23,21 +23,24 @@ import Data.List
 null' (x:z) = not True
 
 --pembatas
+--UNFINISHED
+take' 0 (x:z) = []
+take' 1 (x:z) = [x]
+take' n (x:z) = (x:z)
+--pembatas
 
-take' x = x
+drop' 0 c = c
+drop' _ [] = []
+drop' n (w:c) = drop' (n-1) c
+
 
 --pembatas
 
-drop' x = x
-
-
---pembatas
-
-fst' (x,y) = x
+fst' (x,_) = x
 
 --pembatas
 
-snd' (x,y) = y
+snd' (_,y) = y
 
 --pembatas
 
