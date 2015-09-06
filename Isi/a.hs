@@ -69,9 +69,8 @@ foldl1' x = x
 --pembatas
 --not yet
 zip' [a] [b] = [(a,b)]
-if zip' [a] [] then zip' [a] [b] = []
-  else zip' [a] [b] = [(a,b)]
-
+zip' [] [b] = []
+zip' [a] [] = []
 
 --pembatas
 
