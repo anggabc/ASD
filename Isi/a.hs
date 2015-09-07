@@ -20,18 +20,24 @@ import Data.List
 
 -- 1.a
 
-null' (x:z) = not True
-null' [] = not False
+null' [] = True
+null' _ = False
+
 --pembatas
 --UNFINISHED
-take' 0 (x:z) = []
-take' 1 (x:z) = [x]
-take' n (x:z) = (x:z)
---pembatas
 
-drop' 0 c = c
+take' n (x:z)
+  | n <= 0 = []
+  | n == 1 = [x]
+
+-- | otherwise = take (n) z
+--pembatas
+--UNFINISHED
+
 drop' _ [] = []
-drop' n (w:c) = drop' (n-1) c
+drop' n (w:c)
+  | n <= 0 = (w:c)
+  | otherwise = drop' (n-1) c
 
 
 --pembatas
@@ -172,7 +178,7 @@ or' (x:xs)
 
 zip3' x = x
 
---pembatas
+--
 
 sum' [] = 0
 sum' (x:xs) = x + sum' xs
@@ -252,6 +258,7 @@ inits' x = x
 tails' x = x
 
 --pembatas
+--not yet
 
 union' [] [] = []
 union' (x:xs) (y:ys)
@@ -276,12 +283,10 @@ partition' x = x
 
 --pembatas
 
--- not yet
 replicate' a b
   | a == 1 = [b]
-  | a == 0 = []
-  | otherwise = (b:replicate' a b)
-  -- maybe use length function
+  | a <= 0 = []
+  | otherwise = (b:replicate' (a-1) b)
 
 --pembatas
 -- First Assignment
