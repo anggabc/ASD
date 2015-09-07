@@ -21,7 +21,7 @@ import Data.List
 -- 1.a
 
 null' (x:z) = not True
-
+null' [] = not False
 --pembatas
 --UNFINISHED
 take' 0 (x:z) = []
@@ -51,12 +51,16 @@ map' x = x
 filter' x = x
 
 --pembatas
---not yet
-delete' n [x] = [x]
+
+delete' _ [] = []
+delete' a (x:xs)
+  | a == x = xs
+  | otherwise = (x:delete' a xs)
 
 --pembatas
 --not yet
-deleteAll' x = []
+deleteAll' _ [] = []
+
 
 --pembatas
 
@@ -67,7 +71,7 @@ foldl' x = x
 foldl1' x = x
 
 --pembatas
---not yet
+
 zip' [a] [b] = [(a,b)]
 zip' [] [b] = []
 zip' [a] [] = []
@@ -90,31 +94,39 @@ scanl1' x = x
 
 --pembatas
 
-elem' x = x
+elem' _ [] = False
+elem' n (x:xs)
+  | n == x = True
+  | otherwise = elem' n xs
 
 --pembatas
 
-notElem' x = x
+notElem' _ [] = not False
+notElem' n (x:xs)
+  | n == x = not True
+  | otherwise = notElem' n xs
+
 
 --pembatas
 
-head' x = x
+head' (x:xs) = x
 
 --pembatas
 
-length' x = x
+length' [] = 0
+length' (x:y) = 1 + (length' y)
 
 --pembatas
 
 reverse' x = x
 
 --pembatas
-
-last' x = x
+--helphelphelphelpmybrainisonfire
+last' (x:y) = y
 
 --pembatas
 
-tail' x = x
+tail' (x:xs) = xs
 
 --pembatas
 
@@ -122,11 +134,15 @@ init' x = x
 
 --pembatas
 
-max' x = x
+max' x y
+  | x > y = x
+  | otherwise = y
 
 --pembatas
 
-min' x = x
+min' x y
+  | x < y = x
+  | otherwise = y
 
 --pembatas
 
@@ -142,11 +158,15 @@ intercalate' x = x
 
 --pembatas
 
-and' x = x
+and' (x:xs)
+  | x == False = False
+  | otherwise = and' xs
 
 --pembatas
 
-or' x = x
+or' (x:xs)
+  | x == True = True
+  | otherwise = or' xs
 
 --pembatas
 
@@ -154,7 +174,8 @@ zip3' x = x
 
 --pembatas
 
-sum' x = x
+sum' [] = 0
+sum' (x:xs) = x + sum' xs
 
 --pembatas
 
@@ -205,7 +226,7 @@ insert' x = x
 zipWith3' x = x
 
 --pembatas
-
+------------------------------------------------------
 -- 1.b
 
 nub' x = x
@@ -232,7 +253,10 @@ tails' x = x
 
 --pembatas
 
-union' x = x
+union' [] [] = []
+union' (x:xs) (y:ys)
+  | (x:xs) ==  (y:ys) = (x:xs)
+
 
 --pembatas
 
@@ -252,7 +276,12 @@ partition' x = x
 
 --pembatas
 
-replicate' x = x
+-- not yet
+replicate' a b
+  | a == 1 = [b]
+  | a == 0 = []
+  | otherwise = (b:replicate' a b)
+  -- maybe use length function
 
 --pembatas
 -- First Assignment
