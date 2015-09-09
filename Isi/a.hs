@@ -50,7 +50,8 @@ snd' (_,y) = y
 
 --pembatas
 
-map' x = x
+map' f [] = []
+map' f (x:xs) = f x : map' f xs
 
 --pembatas
 
@@ -62,12 +63,13 @@ delete' _ [] = []
 delete' a (x:xs)
   | a == x = xs
   | otherwise = (x:delete' a xs)
-
 --pembatas
+
 --not yet
-deleteAll' _ [] = []
-
-
+deleteAll' a [] = []
+deleteAll' a (x:xs)
+  | a == x = deleteAll' a xs
+  | otherwise = x: deleteAll' a xs
 --pembatas
 
 foldl' x = x
@@ -117,7 +119,9 @@ notElem' n (x:xs)
 
 head' (x:xs) = x
 
+
 --pembatas
+
 
 length' [] = 0
 length' (x:y) = 1 + (length' y)
@@ -127,8 +131,9 @@ length' (x:y) = 1 + (length' y)
 reverse' x = x
 
 --pembatas
---helphelphelphelpmybrainisonfire
-last' (x:y) = y
+
+last' [x] = x
+last' (x:xs) = last' xs
 
 --pembatas
 
@@ -136,7 +141,9 @@ tail' (x:xs) = xs
 
 --pembatas
 
-init' x = x
+init' [x] = []
+init' (x:xs)
+  | otherwise = x: init' xs
 
 --pembatas
 
@@ -164,12 +171,13 @@ intercalate' x = x
 
 --pembatas
 
+and' [] = True
 and' (x:xs)
   | x == False = False
   | otherwise = and' xs
 
 --pembatas
-
+or' [] = False
 or' (x:xs)
   | x == True = True
   | otherwise = or' xs
@@ -185,7 +193,8 @@ sum' (x:xs) = x + sum' xs
 
 --pembatas
 
-product' x = x
+product' [] = 1
+product' (x:xs) = x * product' xs
 
 --pembatas
 
@@ -217,15 +226,23 @@ concatMap' x = x
 
 --pembatas
 
-all' x = x
+all' _ [] = True
+all' n (x:xs)
+  | n x == True = True
+  | otherwise = x
+
+
+--pembatas
+any' _ [] = []
+any' n (x:xs)
+  | n == True = xs
 
 --pembatas
 
-any' x = x
-
---pembatas
-
-insert' x = x
+insert' a [] = [a]
+insert' a (x:xs)
+  | a <= x = a: (x:xs)
+  | a >= x = x:a: insert a xs
 
 --pembatas
 
@@ -284,7 +301,6 @@ partition' x = x
 --pembatas
 
 replicate' a b
-  | a == 1 = [b]
   | a <= 0 = []
   | otherwise = (b:replicate' (a-1) b)
 
