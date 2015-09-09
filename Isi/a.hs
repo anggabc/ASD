@@ -63,13 +63,14 @@ delete' _ [] = []
 delete' a (x:xs)
   | a == x = xs
   | otherwise = (x:delete' a xs)
+  
 --pembatas
 
---not yet
 deleteAll' a [] = []
 deleteAll' a (x:xs)
   | a == x = deleteAll' a xs
   | otherwise = x: deleteAll' a xs
+  
 --pembatas
 
 foldl' x = x
