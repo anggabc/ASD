@@ -1,7 +1,7 @@
 module A where
 import Data.List
 
-
+-- 25/57 
 
 --------selau-------men-----------------------
 
@@ -24,20 +24,19 @@ null' [] = True
 null' _ = False
 
 --pembatas
---UNFINISHED
 
-take' n (x:z)
+take' _ [] = []
+take' n (x:xs)
   | n <= 0 = []
-  | n == 1 = [x]
+  | otherwise = x: take (n-1) xs
 
--- | otherwise = take (n) z
 --pembatas
---UNFINISHED
 
 drop' _ [] = []
 drop' n (w:c)
   | n <= 0 = (w:c)
   | otherwise = drop' (n-1) c
+
 
 
 --pembatas
@@ -54,23 +53,24 @@ map' f [] = []
 map' f (x:xs) = f x : map' f xs
 
 --pembatas
-
-filter' x = x
-
+--not yet
+filter' _ [] = []
+filter' n (x:xs)
+  | n x == True = filter' n xs
+  | otherwise = filter' n xs
 --pembatas
 
 delete' _ [] = []
 delete' a (x:xs)
   | a == x = xs
   | otherwise = (x:delete' a xs)
-  
+
 --pembatas
 
 deleteAll' a [] = []
 deleteAll' a (x:xs)
   | a == x = deleteAll' a xs
   | otherwise = x: deleteAll' a xs
-  
 --pembatas
 
 foldl' x = x
@@ -80,7 +80,7 @@ foldl' x = x
 foldl1' x = x
 
 --pembatas
-
+--not yet lumayan susah boi
 zip' [a] [b] = [(a,b)]
 zip' [] [b] = []
 zip' [a] [] = []
@@ -229,14 +229,15 @@ concatMap' x = x
 
 all' _ [] = True
 all' n (x:xs)
-  | n x == True = True
-  | otherwise = x
+  | n x == False = False
+  | otherwise = all' n xs
 
 
 --pembatas
-any' _ [] = []
+any' _ [] = False
 any' n (x:xs)
-  | n == True = xs
+  | n x == True = True
+  | otherwise = any' n xs
 
 --pembatas
 
