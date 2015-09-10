@@ -1,7 +1,7 @@
 module A where
 import Data.List
 
--- 25/57 
+-- 28/57
 
 --------selau-------men-----------------------
 
@@ -56,8 +56,9 @@ map' f (x:xs) = f x : map' f xs
 --not yet
 filter' _ [] = []
 filter' n (x:xs)
-  | n x == True = filter' n xs
-  | otherwise = filter' n xs
+  | n x == False = filter' n xs
+  | otherwise = x : filter' n xs
+
 --pembatas
 
 delete' _ [] = []
@@ -80,10 +81,12 @@ foldl' x = x
 foldl1' x = x
 
 --pembatas
---not yet lumayan susah boi
-zip' [a] [b] = [(a,b)]
+
 zip' [] [b] = []
 zip' [a] [] = []
+zip' (x:xs) (y:ys)
+  | (y:ys) == [y] = [(x,y)]
+  | otherwise = (x,y) :zip' (xs) (ys)
 
 --pembatas
 
@@ -91,7 +94,8 @@ zipWith' x = x
 
 --pembatas
 
-nth' x = x
+nth' (x:xs) 0 = x
+nth' (x:xs) n = nth' xs (n-1)
 
 --pembatas
 
@@ -129,7 +133,9 @@ length' (x:y) = 1 + (length' y)
 
 --pembatas
 
-reverse' x = x
+reverse' [] = []
+reverse' [x] = [x]
+reverse' (x:xs) = x : reverse' (xs)
 
 --pembatas
 
