@@ -1,7 +1,7 @@
 module A where
 import Data.List
 
--- 30/57
+-- 33/57
 
 --------selau-------men-----------------------
 
@@ -10,13 +10,6 @@ import Data.List
 -- (:set prompt "blabla")
 -- commit suicide
 -----------------------------------------------
-
--- First Assignment
--- I'M NOT USING GOOGLE
--- JUST KIDDING
--- JUST fucking KIDDING ^
-
-
 
 -- 1.a
 
@@ -33,9 +26,9 @@ take' n (x:xs)
 --pembatas
 
 drop' _ [] = []
-drop' n (w:c)
-  | n <= 0 = (w:c)
-  | otherwise = drop' (n-1) c
+drop' n (x:xs)
+  | n <= 0 = (x:xs)
+  | otherwise = drop' (n-1) xs
 
 
 
@@ -132,12 +125,12 @@ length' [] = 0
 length' (x:y) = 1 + (length' y)
 
 --pembatas
-
+--not yet
 reverse' [] = []
 reverse' [x] = [x]
-reverse' [a,b] = [b,a]
-reverse' (x:xs) = reverse' (xs) : x
-
+--reverse' [a,b] = [b,a]
+reverse' (x:xs)
+  | otherwise = reverse' xs
 --pembatas
 
 last' [x] = x
@@ -167,7 +160,7 @@ min' x y
 
 --pembatas
 
-concat' x = x
+concat' [(x:xs)] = x:xs
 
 --pembatas
 
@@ -179,6 +172,7 @@ intersperse' n (x:xs) = x: n: intersperse' n xs
 
 intercalate' [] [[]] = []
 intercalate' [] [(z:zs)] = (z:zs)
+intercalate' [a] [[]] = []
 intercalate' (x:xs) [(y:ys)] = (y:ys)
 
 
@@ -190,6 +184,7 @@ and' (x:xs)
   | otherwise = and' xs
 
 --pembatas
+
 or' [] = False
 or' (x:xs)
   | x == True = True
@@ -218,16 +213,17 @@ words' x = x
 lines' x = x
 
 --pembatas
+--unfinished
+unlines' [(x)] = "(x)" ++ "\n"
 
-unlines' x = x
+
 
 --pembatas
 
 unwords' x = x
 
 --pembatas
-
-takeWhile' x = x
+takeWhile' _ [] = []
 
 --pembatas
 
@@ -256,7 +252,7 @@ any' n (x:xs)
 insert' a [] = [a]
 insert' a (x:xs)
   | a <= x = a: (x:xs)
-  | a >= x = x:a: insert a xs
+  | a >= x = x: insert a xs
 
 --pembatas
 
@@ -266,16 +262,16 @@ zipWith3' x = x
 ------------------------------------------------------
 -- 1.b
 
-nub' x = x
-
+nub' (x:xs) = (x:xs)
+--Eq a?
 --pembatas
 
-sort' x = x
-
+sort' [] = []
 --pembatas
 
-minimum' x = x
-
+minimum'[] = []
+minimum' [x] = [x]
+minimum' (x:xs) = xs
 --pembatas
 
 maximum' x = x
@@ -289,12 +285,12 @@ inits' x = x
 tails' x = x
 
 --pembatas
---not yet
 
 union' [] [] = []
+union' (x:xs) [y] = delete y (x:xs) ++ [y]
 union' (x:xs) (y:ys)
-  | (x:xs) ==  (y:ys) = (x:xs)
-
+  | x == y = (x:xs) ++ delete' y (y:ys)
+  | otherwise = (x:xs) ++ (y:ys)
 
 --pembatas
 
