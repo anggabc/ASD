@@ -1,7 +1,7 @@
 module A where
 import Data.List
 
--- 28/57
+-- 30/57
 
 --------selau-------men-----------------------
 
@@ -135,7 +135,8 @@ length' (x:y) = 1 + (length' y)
 
 reverse' [] = []
 reverse' [x] = [x]
-reverse' (x:xs) = x : reverse' (xs)
+reverse' [a,b] = [b,a]
+reverse' (x:xs) = reverse' (xs) : x
 
 --pembatas
 
@@ -170,11 +171,16 @@ concat' x = x
 
 --pembatas
 
-intersperse' x = x
+intersperse' n [] = []
+intersperse' n [y] = [y]
+intersperse' n (x:xs) = x: n: intersperse' n xs
 
 --pembatas
 
-intercalate' x = x
+intercalate' [] [[]] = []
+intercalate' [] [(z:zs)] = (z:zs)
+intercalate' (x:xs) [(y:ys)] = (y:ys)
+
 
 --pembatas
 
