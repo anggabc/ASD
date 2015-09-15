@@ -1,7 +1,7 @@
 module A where
 import Data.List
 
--- 33/57
+-- 36/57
 
 --------selau-------men-----------------------
 
@@ -9,6 +9,7 @@ import Data.List
 -- (:cd e:/code/ASD/Isi)
 -- (:set prompt "blabla")
 -- commit suicide
+-- can use pred succ
 -----------------------------------------------
 
 -- 1.a
@@ -30,8 +31,6 @@ drop' n (x:xs)
   | n <= 0 = (x:xs)
   | otherwise = drop' (n-1) xs
 
-
-
 --pembatas
 
 fst' (x,_) = x
@@ -46,7 +45,7 @@ map' f [] = []
 map' f (x:xs) = f x : map' f xs
 
 --pembatas
---not yet
+
 filter' _ [] = []
 filter' n (x:xs)
   | n x == False = filter' n xs
@@ -112,25 +111,20 @@ notElem' n (x:xs)
   | n == x = not True
   | otherwise = notElem' n xs
 
-
 --pembatas
 
 head' (x:xs) = x
 
-
 --pembatas
-
 
 length' [] = 0
 length' (x:y) = 1 + (length' y)
 
 --pembatas
---not yet
+
 reverse' [] = []
-reverse' [x] = [x]
---reverse' [a,b] = [b,a]
-reverse' (x:xs)
-  | otherwise = reverse' xs
+reverse' (x:xs) = reverse' xs ++ [x]
+
 --pembatas
 
 last' [x] = x
@@ -175,7 +169,6 @@ intercalate' [] [(z:zs)] = (z:zs)
 intercalate' [a] [[]] = []
 intercalate' (x:xs) [(y:ys)] = (y:ys)
 
-
 --pembatas
 
 and' [] = True
@@ -206,8 +199,7 @@ product' (x:xs) = x * product' xs
 
 --pembatas
 
-words' x = x
-
+words' (x:xs) = [x:xs]
 --pembatas
 
 lines' x = x
@@ -269,16 +261,17 @@ nub' (x:xs) = (x:xs)
 sort' [] = []
 --pembatas
 
-minimum'[] = []
-minimum' [x] = [x]
-minimum' (x:xs) = xs
+minimum' [x] = x
+minimum' (x:xs) = min' x (minimum' xs)
 --pembatas
 
-maximum' x = x
+maximum' [x] = x
+maximum' (x:xs) = max' x (maximum' xs)
 
 --pembatas
-
-inits' x = x
+--not yet
+inits' (x:xs)
+- --otherwise = inits' xs ++ (init' (x:xs)) ++ (x:xs) ++ []
 
 --pembatas
 
