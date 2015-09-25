@@ -1,7 +1,7 @@
 module A where
 import Data.List
 
--- 36/57
+-- 38/57
 
 --------selau-------men-----------------------
 
@@ -22,6 +22,7 @@ null' _ = False
 take' _ [] = []
 take' n (x:xs)
   | n <= 0 = []
+  | n <= x = [x]
   | otherwise = x: take (n-1) xs
 
 --pembatas
@@ -185,9 +186,17 @@ or' (x:xs)
 
 --pembatas
 
-zip3' x = x
+zip3' [] [] []  = []
+zip3' [] [_] [] = []
+zip3' [] [] [_] = []
+zip3' [_] [] [] = []
+zip3' (x:xs) (y:ys) (z:zs)
+  | (x:xs) == [x] = [(x,y,z)]
+  | (y:ys) == [y] = [(x,y,z)]
+  | (z:zs) == [z] = [(x,y,z)]
+  | otherwise = (x,y,z) : zip3' (xs) (ys) (zs)
 
---
+--pembatas
 
 sum' [] = 0
 sum' (x:xs) = x + sum' xs
@@ -199,27 +208,33 @@ product' (x:xs) = x * product' xs
 
 --pembatas
 
-words' (x:xs) = [x:xs]
+words' x = x
+
 --pembatas
 
 lines' x = x
 
 --pembatas
---unfinished
-unlines' [(x)] = "(x)" ++ "\n"
 
-
+unlines' x = x
 
 --pembatas
 
 unwords' x = x
 
 --pembatas
-takeWhile' _ [] = []
+
+takeWhile' f [] = []
+takeWhile' f (x:xs)
+  | f x == False = []
+  | otherwise = (x:xs)
 
 --pembatas
 
-dropWhile' x = x
+dropWhile' f [] = []
+dropWhile' f (x:xs)
+  | f x == True = []
+  | otherwise = (x:xs)
 
 --pembatas
 
@@ -232,8 +247,8 @@ all' n (x:xs)
   | n x == False = False
   | otherwise = all' n xs
 
-
 --pembatas
+
 any' _ [] = False
 any' n (x:xs)
   | n x == True = True
@@ -254,11 +269,14 @@ zipWith3' x = x
 ------------------------------------------------------
 -- 1.b
 
-nub' (x:xs) = (x:xs)
+nub' [] = []
+nub' (x:xs) = x : nub' xs
 --Eq a?
 --pembatas
-
+--blom bro kehapus padahal tdi udah
 sort' [] = []
+sort' [_] = []
+sort' (x:xs) = minimum' (x:xs) : (sort' xs)
 --pembatas
 
 minimum' [x] = x
@@ -270,8 +288,8 @@ maximum' (x:xs) = max' x (maximum' xs)
 
 --pembatas
 --not yet
-inits' (x:xs)
-- --otherwise = inits' xs ++ (init' (x:xs)) ++ (x:xs) ++ []
+inits' [] = [[]]
+inits' (x:xs) = filter' (>x) (x:xs) : inits' xs
 
 --pembatas
 
@@ -287,8 +305,12 @@ union' (x:xs) (y:ys)
 
 --pembatas
 
-intersect' x = x
-
+intersect' [] []  = []
+intersect' (x:xs) [] = []
+intersect' [] (x:xs) = []
+intersect' (x:xs) (y:ys)
+  | x == y = [x]
+  | otherwise = insert x : intersect xs ys
 --pembatas
 
 group' x = x
