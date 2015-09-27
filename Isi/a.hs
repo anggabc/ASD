@@ -1,7 +1,7 @@
 module A where
 import Data.List
 
--- 38/57
+-- 41/57
 
 --------selau-------men-----------------------
 
@@ -22,7 +22,6 @@ null' _ = False
 take' _ [] = []
 take' n (x:xs)
   | n <= 0 = []
-  | n <= x = [x]
   | otherwise = x: take (n-1) xs
 
 --pembatas
@@ -51,6 +50,13 @@ filter' _ [] = []
 filter' n (x:xs)
   | n x == False = filter' n xs
   | otherwise = x : filter' n xs
+
+--pembatas
+
+antifilter _ [] = []
+antifilter n (x:xs)
+  | n x == True = antifilter n xs
+  | otherwise = x : antifilter n xs
 
 --pembatas
 
@@ -164,11 +170,11 @@ intersperse' n [y] = [y]
 intersperse' n (x:xs) = x: n: intersperse' n xs
 
 --pembatas
-
+--blom
 intercalate' [] [[]] = []
 intercalate' [] [(z:zs)] = (z:zs)
 intercalate' [a] [[]] = []
-intercalate' (x:xs) [(y:ys)] = (y:ys)
+--intercalate' (x:xs) (a:[(y:ys)]) = y : (x:xs) : intercalate' (x:xs) (ys)
 
 --pembatas
 
@@ -185,7 +191,7 @@ or' (x:xs)
   | otherwise = or' xs
 
 --pembatas
-
+--sdikit salah
 zip3' [] [] []  = []
 zip3' [] [_] [] = []
 zip3' [] [] [_] = []
@@ -195,7 +201,8 @@ zip3' (x:xs) (y:ys) (z:zs)
   | (y:ys) == [y] = [(x,y,z)]
   | (z:zs) == [z] = [(x,y,z)]
   | otherwise = (x,y,z) : zip3' (xs) (ys) (zs)
-
+-- ga boleh ada [x..y]
+--  x y = num
 --pembatas
 
 sum' [] = 0
@@ -275,8 +282,10 @@ nub' (x:xs) = x : nub' xs
 --pembatas
 --blom bro kehapus padahal tdi udah
 sort' [] = []
-sort' [_] = []
-sort' (x:xs) = minimum' (x:xs) : (sort' xs)
+sort' [a,b]
+  | a > b = [a,b]
+  | otherwise = [b,a]
+sort' (x:xs) = filter' (>x) (x:xs) ++ sort' xs
 --pembatas
 
 minimum' [x] = x
@@ -304,24 +313,32 @@ union' (x:xs) (y:ys)
   | otherwise = (x:xs) ++ (y:ys)
 
 --pembatas
-
+--blom
 intersect' [] []  = []
 intersect' (x:xs) [] = []
 intersect' [] (x:xs) = []
 intersect' (x:xs) (y:ys)
   | x == y = [x]
-  | otherwise = insert x : intersect xs ys
---pembatas
 
-group' x = x
 
 --pembatas
-
-splitAt' x = x
+--blom
+group' [] = []
+group' (x:xs)
+  | (x:xs) == [x,x] = [[x,x]]
+  | otherwise = [x] : group' xs
 
 --pembatas
 
-partition' x = x
+splitAt' n [] = ([],[])
+splitAt' n (x:xs)
+  | otherwise = ((d) , (reverse'(take'((length' (x:xs)) - n) (reverse' (x:xs)))))
+    where d = (take' n (x:xs))
+
+--pembatas
+
+partition' n [] = ([],[])
+partition' n (x:xs) =( (filter' n (x:xs)) , (antifilter n (x:xs)) )
 
 --pembatas
 
