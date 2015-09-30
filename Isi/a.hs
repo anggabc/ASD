@@ -277,8 +277,8 @@ zipWith3' x = x
 -- 1.b
 
 nub' [] = []
-nub' (x:xs) = x : nub' xs
---Eq a?
+nub' (x:xs) = x : deleteAll' x (nub xs)
+
 --pembatas
 --blom bro kehapus padahal tdi udah
 sort' [] = []
@@ -307,10 +307,9 @@ tails' x = x
 --pembatas
 
 union' [] [] = []
-union' (x:xs) [y] = delete y (x:xs) ++ [y]
 union' (x:xs) (y:ys)
-  | x == y = (x:xs) ++ delete' y (y:ys)
-  | otherwise = (x:xs) ++ (y:ys)
+--  | x == y = y
+  | otherwise = (x:xs) : union' xs ys
 
 --pembatas
 --blom
@@ -322,6 +321,7 @@ intersect' (x:xs) (y:ys)
 
 
 --pembatas
+
 --blom
 group' [] = []
 group' (x:xs)
