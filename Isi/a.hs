@@ -144,8 +144,7 @@ tail' (x:xs) = xs
 --pembatas
 
 init' [x] = []
-init' (x:xs)
-  | otherwise = x: init' xs
+init' (x:xs) = x: init' xs
 
 --pembatas
 
@@ -191,18 +190,12 @@ or' (x:xs)
   | otherwise = or' xs
 
 --pembatas
---sdikit salah
-zip3' [] [] []  = []
-zip3' [] [_] [] = []
-zip3' [] [] [_] = []
-zip3' [_] [] [] = []
-zip3' (x:xs) (y:ys) (z:zs)
-  | (x:xs) == [x] = [(x,y,z)]
-  | (y:ys) == [y] = [(x,y,z)]
-  | (z:zs) == [z] = [(x,y,z)]
-  | otherwise = (x,y,z) : zip3' (xs) (ys) (zs)
--- ga boleh ada [x..y]
---  x y = num
+
+zip3' [] _ _ = []
+zip3' _ [] _  = []
+zip3' _ _ [] = []
+zip3' (x:xs) (y:ys) (z:zs) = (x,y,z) : zip3' (xs) (ys) (zs)
+
 --pembatas
 
 sum' [] = 0
