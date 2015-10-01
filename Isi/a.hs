@@ -1,7 +1,7 @@
 module A where
 import Data.List
 
--- 41/57
+-- 44/57
 
 --------selau-------men-----------------------
 
@@ -296,20 +296,19 @@ maximum' [x] = x
 maximum' (x:xs) = max' x (maximum' xs)
 
 --pembatas
---not yet
+
 inits' [] = [[]]
-inits' (x:xs) = filter' (>x) (x:xs) : inits' xs
+inits' (x:xs) = reverse' (tails' (x:xs))
 
 --pembatas
 
-tails' x = x
+tails' [] = [[]]
+tails' (x:xs) = (x:xs) : tails' xs
 
 --pembatas
 
 union' [] [] = []
-union' (x:xs) (y:ys)
---  | x == y = y
-  | otherwise = (x:xs) : union' xs ys
+union' (x:xs) (y:ys) = nub' ((x:xs) ++ (y:ys))
 
 --pembatas
 --blom
