@@ -73,7 +73,8 @@ deleteAll' a (x:xs)
   | otherwise = x: deleteAll' a xs
 --pembatas
 
-foldl' x = x
+foldl' f n [] = []
+--foldl' f n (x:xs) = f n (f x (foldl' f n xs))
 
 --pembatas
 
@@ -291,7 +292,7 @@ maximum' (x:xs) = max' x (maximum' xs)
 --pembatas
 
 inits' [] = [[]]
-inits' (x:xs) = reverse' (tails' (x:xs))
+inits' (x:xs) = reverse ((x:xs) : reverse (inits' (init (x:xs))))
 
 --pembatas
 
@@ -301,7 +302,7 @@ tails' (x:xs) = (x:xs) : tails' xs
 --pembatas
 
 union' [] [] = []
-union' (x:xs) (y:ys) = nub' ((x:xs) ++ (y:ys))
+union' x y = nub' (x ++ y)
 
 --pembatas
 --blom
